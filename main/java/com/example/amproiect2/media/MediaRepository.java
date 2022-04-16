@@ -1,4 +1,4 @@
-package com.example.amproiect2.profile;
+package com.example.amproiect2.media;
 
 import com.example.amproiect2.datastore.FakeMediaDataStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserProfileDataAccessService {
+public class MediaRepository {
 
     private final FakeMediaDataStore fakeMediaDataStore;
 
     @Autowired
-    public UserProfileDataAccessService(FakeMediaDataStore fakeImageDataStore) {
+    public MediaRepository(FakeMediaDataStore fakeImageDataStore) {
         this.fakeMediaDataStore = fakeImageDataStore;
     }
 

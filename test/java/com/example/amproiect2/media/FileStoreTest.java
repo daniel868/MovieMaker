@@ -1,4 +1,4 @@
-package com.example.amproiect2.profile;
+package com.example.amproiect2.media;
 
 
 import com.example.amproiect2.buckets.BucketName;

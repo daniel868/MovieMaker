@@ -1,4 +1,4 @@
-package com.example.amproiect2.profile;
+package com.example.amproiect2.media;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,20 +11,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/user-profile")
 @CrossOrigin("*")
-public class UserProfileController {
+public class MediaController {
 
-    private final UserProfileService userProfileService;
+    private final MediaService mediaService;
 
     @Autowired
-    public UserProfileController(UserProfileService userProfileService) {
-        this.userProfileService = userProfileService;
+    public MediaController(MediaService mediaService) {
+        this.mediaService = mediaService;
     }
-
-    @GetMapping
-    public List<UserProfile> getUserProfiles() {
-        return userProfileService.getUserProfiles();
-    }
-
 
     @PostMapping(
             path = "/image/upload",
@@ -32,7 +26,7 @@ public class UserProfileController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public void uploadUserProfileImage(@RequestParam("file") MultipartFile file) {
-        userProfileService.uploadUserProfileImage(file);
+        mediaService.uploadUserProfileImage(file);
     }
 
     @PostMapping(
@@ -41,29 +35,29 @@ public class UserProfileController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public void uploadAudioFile(MultipartFile file) {
-        userProfileService.uploadAudioFile(file);
+        mediaService.uploadAudioFile(file);
     }
 
     @GetMapping("/images/download")
     public List<String> downloadImages() {
-        return userProfileService.downloadAllImages();
+        return mediaService.downloadAllImages();
     }
 
     @GetMapping("/images/download/{imageIndex}")
     public byte[] getImageByIndex(@PathVariable("imageIndex") int imageIndex) {
-        return Optional.of(userProfileService.downloadImages()
+        return Optional.of(mediaService.downloadImages()
                         .get(imageIndex))
                 .orElse(new byte[0]);
     }
 
     @GetMapping("/audio/download")
     public List<String> downloadAudio() {
-        return userProfileService.downloadAudioFiles();
+        return mediaService.downloadAudioFiles();
     }
 
     @GetMapping("/audio/download/{audioIndex}")
     public byte[] getAudioByIndex(@PathVariable("audioIndex") int audioIndex) {
-        return userProfileService.downloadAudioFileByIndex(audioIndex);
+        return mediaService.downloadAudioFileByIndex(audioIndex);
 
     }
 
