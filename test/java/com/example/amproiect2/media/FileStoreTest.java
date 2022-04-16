@@ -2,7 +2,7 @@ package com.example.amproiect2.media;
 
 
 import com.example.amproiect2.buckets.BucketName;
-import com.example.amproiect2.filestore.FileStore;
+import com.example.amproiect2.filestore.AmazonFileStore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class FileStoreTest {
 
     @Autowired
-    private FileStore fileStore;
+    private AmazonFileStore fileStore;
 
     @Test
     void assertThatFileStoreIsWorking() throws Exception {

@@ -1,7 +1,7 @@
 package com.example.amproiect2.media;
 
 import com.example.amproiect2.buckets.BucketName;
-import com.example.amproiect2.filestore.FileStore;
+import com.example.amproiect2.filestore.AmazonFileStore;
 import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,47 +17,39 @@ public class MediaService {
     private final static String URL_AUDIO = "http://localhost:8080/api/v1/user-profile/audio/download/";
 
     private final MediaRepository mediaRepository;
-    private final FileStore fileStore;
+    private final AmazonFileStore amazonfileStore;
 
     @Autowired
-    public MediaService(MediaRepository mediaRepository, FileStore fileStore) {
+    public MediaService(MediaRepository mediaRepository, AmazonFileStore fileStore) {
         this.mediaRepository = mediaRepository;
-        this.fileStore = fileStore;
+        this.amazonfileStore = fileStore;
     }
 
-    public void uploadUserProfileImage(MultipartFile file) {
+    public void uploadFile(MultipartFile file, String folderName) {
         //check if image is not empty
         if (file.isEmpty()) {
             throw new IllegalStateException("Cannot upload empty file [ " + file.getSize() + " ]");
         }
 
         //if file is an image
-        if (!Arrays.asList(
-                        ContentType.IMAGE_JPEG.getMimeType(),
-                        ContentType.IMAGE_PNG.getMimeType(),
-                        ContentType.IMAGE_BMP.getMimeType())
-                .contains(file.getContentType())) {
-            throw new IllegalStateException("File must be an image");
-        }
+//        if (!Arrays.asList(
+//                        ContentType.IMAGE_JPEG.getMimeType(),
+//                        ContentType.IMAGE_PNG.getMimeType(),
+//                        ContentType.IMAGE_BMP.getMimeType()
+//                        )
+//                .contains(file.getContentType())) {
+//            throw new IllegalStateException("File must be an image");
+//        }
 
         //get some metadata from file
         HashMap<String, String> metaData = new HashMap<>();
         metaData.put("Content-Type", file.getContentType());
         metaData.put("Content-Length", String.valueOf(file.getSize()));
 
-        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), "user1");
-
+        String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), folderName);
 
         try {
-            byte[] uploadedImage = Optional.of(file.getBytes())
-                    .orElseThrow(() -> new RuntimeException("Could not read the file"));
-
-
-            mediaRepository.getFakeMediaDataStore()
-                    .getImages()
-                    .add(uploadedImage);
-            System.out.println("Reading input image file " + mediaRepository.getFakeImageList().size());
-
+            amazonfileStore.save(path, file.getOriginalFilename(), Optional.of(metaData), file.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,12 +65,8 @@ public class MediaService {
         }
     }
 
-    public List<byte[]> downloadImages() {
-        return mediaRepository.getFakeImageList();
-    }
-
-    public List<String> downloadAllImages() {
-        //some call to the database to get all images stored for a specific project
+    public List<String> retrieveImagesFilePath() {
+        //TODO:some call to the database to get all images stored for a specific project
 
         List<String> imagePath = new ArrayList<>();
         for (int i = 0; i < mediaRepository.getFakeImageList().size(); i++) {
@@ -89,8 +77,9 @@ public class MediaService {
         return imagePath;
     }
 
-    public List<String> downloadAudioFiles() {
-        //some call to the database to get all images path stored for a specific project
+    public List<String> retrieveAudioFilesPath() {
+        //TODO:some call to the database to get all images path stored for a specific project
+
         List<String> audioPath = new ArrayList<>();
         for (int i = 0; i < mediaRepository.getFakeAudioList().size(); i++) {
             String filePath = String.format("%s%d", URL_AUDIO, i);
@@ -99,9 +88,17 @@ public class MediaService {
         return audioPath;
     }
 
+    public byte[] getImageFileByIndex(int index) {
+        return Optional.of(mediaRepository
+                        .getFakeImageList()
+                        .get(index))
+                .orElseThrow(() -> new RuntimeException("Could not retrieve image file at index: " + index));
+    }
+
     public byte[] downloadAudioFileByIndex(int index) {
-        return mediaRepository
-                .getFakeAudioList()
-                .get(index);
+        return Optional.of(mediaRepository
+                        .getFakeAudioList()
+                        .get(index))
+                .orElseThrow(() -> new RuntimeException("Could not retrieve audio file at index: " + index));
     }
 }

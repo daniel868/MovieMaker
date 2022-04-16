@@ -4,20 +4,22 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.example.amproiect2.buckets.BucketName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FileStore {
+public class AmazonFileStore {
     private final AmazonS3 s3;
 
     @Autowired
-    public FileStore(AmazonS3 s3) {
+    public AmazonFileStore(AmazonS3 s3) {
         this.s3 = s3;
     }
 

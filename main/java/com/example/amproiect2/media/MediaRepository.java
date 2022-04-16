@@ -1,30 +1,34 @@
 package com.example.amproiect2.media;
 
-import com.example.amproiect2.datastore.FakeMediaDataStore;
+import com.example.amproiect2.datastore.MediaDataStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
 public class MediaRepository {
 
-    private final FakeMediaDataStore fakeMediaDataStore;
+    //TODO: add media data store entity
+    //TODO: add local database entity
+    private final MediaDataStore mediaDataStore;
 
     @Autowired
-    public MediaRepository(FakeMediaDataStore fakeImageDataStore) {
-        this.fakeMediaDataStore = fakeImageDataStore;
+    public MediaRepository(MediaDataStore mediaDataStore) {
+        this.mediaDataStore = mediaDataStore;
     }
 
     public List<byte[]> getFakeImageList() {
-        return fakeMediaDataStore.getImages();
+        return mediaDataStore.getImageBlobFiles();
     }
 
     public List<byte[]> getFakeAudioList() {
-        return fakeMediaDataStore.getAudio();
+        return new LinkedList<>();
     }
 
-    public FakeMediaDataStore getFakeMediaDataStore() {
-        return fakeMediaDataStore;
+
+    public MediaDataStore getMediaDataStore() {
+        return mediaDataStore;
     }
 }

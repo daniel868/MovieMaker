@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/user-profile")
@@ -25,8 +24,8 @@ public class MediaController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void uploadUserProfileImage(@RequestParam("file") MultipartFile file) {
-        mediaService.uploadUserProfileImage(file);
+    public void uploadImageFile(@RequestParam("file") MultipartFile file) {
+        mediaService.uploadFile(file, "user1");
     }
 
     @PostMapping(
@@ -35,30 +34,27 @@ public class MediaController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public void uploadAudioFile(MultipartFile file) {
-        mediaService.uploadAudioFile(file);
+        mediaService.uploadFile(file, "audio");
     }
 
     @GetMapping("/images/download")
-    public List<String> downloadImages() {
-        return mediaService.downloadAllImages();
+    public List<String> retrieveImageFilePath() {
+        return mediaService.retrieveImagesFilePath();
     }
 
     @GetMapping("/images/download/{imageIndex}")
-    public byte[] getImageByIndex(@PathVariable("imageIndex") int imageIndex) {
-        return Optional.of(mediaService.downloadImages()
-                        .get(imageIndex))
-                .orElse(new byte[0]);
+    public byte[] getImageFile(@PathVariable("imageIndex") int imageIndex) {
+        return mediaService.getImageFileByIndex(imageIndex);
     }
 
     @GetMapping("/audio/download")
-    public List<String> downloadAudio() {
-        return mediaService.downloadAudioFiles();
+    public List<String> retrieveAudioFilesPath() {
+        return mediaService.retrieveAudioFilesPath();
     }
 
     @GetMapping("/audio/download/{audioIndex}")
-    public byte[] getAudioByIndex(@PathVariable("audioIndex") int audioIndex) {
+    public byte[] getAudioFile(@PathVariable("audioIndex") int audioIndex) {
         return mediaService.downloadAudioFileByIndex(audioIndex);
-
     }
 
 }
