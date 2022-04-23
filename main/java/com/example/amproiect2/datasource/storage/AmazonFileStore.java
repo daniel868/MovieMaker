@@ -1,15 +1,16 @@
-package com.example.amproiect2.filestore;
+package com.example.amproiect2.datasource.storage;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.example.amproiect2.buckets.BucketName;
+import com.example.amproiect2.entities.MediaFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,17 @@ public class AmazonFileStore {
         } catch (AmazonServiceException e) {
             throw new IllegalStateException("Failed to store file to s3", e);
         }
+    }
+
+    public List<byte[]> downloadAllFiles(String bucketName, List<MediaFile> filesKeys) {
+        List<byte[]> files = new ArrayList<>();
+
+        for (MediaFile mediaFile : filesKeys) {
+            byte[] expectedFile = Optional.of(download(bucketName, mediaFile.getAwsObjectKey()))
+                    .orElseThrow(() -> new RuntimeException("Could not obtain file: " + mediaFile.getAwsObjectKey()));
+            files.add(expectedFile);
+        }
+        return files;
     }
 
     public byte[] download(String bucketName, String objectKey) {

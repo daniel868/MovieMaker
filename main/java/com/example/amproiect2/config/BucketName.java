@@ -1,4 +1,4 @@
-package com.example.amproiect2.buckets;
+package com.example.amproiect2.config;
 
 public enum BucketName {
     PROFILE_IMAGE("am-project-bucket");

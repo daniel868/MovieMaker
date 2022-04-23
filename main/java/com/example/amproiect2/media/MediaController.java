@@ -1,5 +1,7 @@
 package com.example.amproiect2.media;
 
+import com.example.amproiect2.entities.LocalFileDto;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ public class MediaController {
 
     private final MediaService mediaService;
 
+
     @Autowired
     public MediaController(MediaService mediaService) {
         this.mediaService = mediaService;
@@ -25,7 +28,7 @@ public class MediaController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public void uploadImageFile(@RequestParam("file") MultipartFile file) {
-        mediaService.uploadFile(file, "user1");
+        mediaService.uploadFile(file, "images");
     }
 
     @PostMapping(
@@ -38,8 +41,13 @@ public class MediaController {
     }
 
     @GetMapping("/images/download")
-    public List<String> retrieveImageFilePath() {
-        return mediaService.retrieveImagesFilePath();
+    public List<LocalFileDto> retrieveImageFilePath() {
+        return mediaService.fetchImagesEndpoint();
+    }
+
+    @GetMapping("/audio/download")
+    public List<LocalFileDto> retrieveAudioFilesPath() {
+        return mediaService.fetchAudioEndpoint();
     }
 
     @GetMapping("/images/download/{imageIndex}")
@@ -47,14 +55,15 @@ public class MediaController {
         return mediaService.getImageFileByIndex(imageIndex);
     }
 
-    @GetMapping("/audio/download")
-    public List<String> retrieveAudioFilesPath() {
-        return mediaService.retrieveAudioFilesPath();
-    }
-
     @GetMapping("/audio/download/{audioIndex}")
     public byte[] getAudioFile(@PathVariable("audioIndex") int audioIndex) {
-        return mediaService.downloadAudioFileByIndex(audioIndex);
+        return mediaService.getAudioFileByIndex(audioIndex);
     }
+
+    @GetMapping("/video/download")
+    public byte[] getVideoPlayer() throws Exception {
+        return mediaService.provideTestVideo();
+    }
+
 
 }

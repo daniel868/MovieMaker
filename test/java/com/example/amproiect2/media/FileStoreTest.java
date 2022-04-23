@@ -1,8 +1,8 @@
 package com.example.amproiect2.media;
 
 
-import com.example.amproiect2.buckets.BucketName;
-import com.example.amproiect2.filestore.AmazonFileStore;
+import com.example.amproiect2.config.BucketName;
+import com.example.amproiect2.datasource.storage.AmazonFileStore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
