@@ -1,4 +1,4 @@
-package com.example.amproiect2.media;
+package com.example.amproiect2.controllers;
 
 
 import com.example.amproiect2.config.BucketName;

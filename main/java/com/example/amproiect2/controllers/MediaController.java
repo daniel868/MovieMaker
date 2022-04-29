@@ -1,7 +1,7 @@
-package com.example.amproiect2.media;
+package com.example.amproiect2.controllers;
 
 import com.example.amproiect2.entities.LocalFileDto;
-import org.apache.tomcat.jni.Local;
+import com.example.amproiect2.servicies.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

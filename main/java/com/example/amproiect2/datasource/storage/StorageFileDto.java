@@ -6,8 +6,9 @@ import java.util.HashMap;
 public class StorageFileDto {
     private final String filePath;
     private final String fileName;
-    private final HashMap<String,String>metaData;
+    private final HashMap<String, String> metaData;
     private final InputStream fileInputStream;
+
 
     public StorageFileDto(String filePath, String fileName, HashMap<String, String> metaData, InputStream fileInputStream) {
         this.filePath = filePath;
@@ -15,6 +16,7 @@ public class StorageFileDto {
         this.metaData = metaData;
         this.fileInputStream = fileInputStream;
     }
+
 
     public String getFilePath() {
         return filePath;
@@ -31,4 +33,5 @@ public class StorageFileDto {
     public InputStream getFileInputStream() {
         return fileInputStream;
     }
+
 }

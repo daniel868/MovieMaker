@@ -6,7 +6,7 @@ import com.example.amproiect2.datasource.storage.AmazonFileStore;
 import com.example.amproiect2.datasource.storage.StorageFileDto;
 import com.example.amproiect2.entities.LocalFileDto;
 import com.example.amproiect2.entities.MediaFile;
-import com.example.amproiect2.media.MediaService;
+import com.example.amproiect2.servicies.MediaService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class MediaDatasource {
             cachedImages = fetchImageFiles();
             cachedAudio = fetchAudioFiles();
         } catch (Exception e) {
-            throw new RuntimeException("Could not save file: ");
+            throw new RuntimeException("Could not save file: " + e.getMessage());
         }
     }
 

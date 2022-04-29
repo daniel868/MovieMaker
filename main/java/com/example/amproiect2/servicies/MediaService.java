@@ -1,4 +1,4 @@
-package com.example.amproiect2.media;
+package com.example.amproiect2.servicies;
 
 import com.example.amproiect2.config.BucketName;
 import com.example.amproiect2.datasource.MediaDatasource;
@@ -62,7 +62,6 @@ public class MediaService {
     }
 
     public byte[] getImageFileByIndex(int index) {
-        System.out.println(Thread.currentThread().getName());
         return Optional.of(mediaDatasource
                         .getCachedImages()
                         .get(index))

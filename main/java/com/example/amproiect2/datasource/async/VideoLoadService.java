@@ -11,10 +11,9 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class VideoLoadService {
 
+    //todo: add a filename to load from
     @Async
     public CompletableFuture<byte[]> loadVideoFile() throws Exception {
-
-        System.out.println(Thread.currentThread().getName());
 
         File file = new File("C:\\Users\\danit\\OneDrive\\Documents\\Bandicam\\bd_proiect.mp4");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

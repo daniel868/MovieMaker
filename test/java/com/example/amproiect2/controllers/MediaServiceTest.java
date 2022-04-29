@@ -1,6 +1,7 @@
-package com.example.amproiect2.media;
+package com.example.amproiect2.controllers;
 
 import com.example.amproiect2.entities.LocalFileDto;
+import com.example.amproiect2.servicies.MediaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MediaServiceTest {
