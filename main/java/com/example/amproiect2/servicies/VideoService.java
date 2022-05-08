@@ -27,6 +27,8 @@ import java.util.concurrent.Semaphore;
 public class VideoService {
     private final MediaDatasource mediaDatasource;
     private byte[] cachedPreview;
+
+    private byte[] cachedMovie;
     private final ScriptsRender script;
 
     @Autowired
@@ -34,6 +36,7 @@ public class VideoService {
         this.mediaDatasource = mediaDatasource;
         this.script = script;
         cachedPreview = new byte[0];
+        cachedMovie = new byte[0];
     }
 
     @Async
@@ -49,23 +52,11 @@ public class VideoService {
                 .get();
     }
 
-    public void renderMovie(MovieArgsDto movieArgsDto) {
-//        VideoScriptArgs movieArgs = VideoScriptArgs.builder()
-//                .imagesUrl(movieArgsDto.getImagesUrl())
-//                .fps(movieArgsDto.getFps())
-//                .outputFileName(movieArgsDto.getVideoFileName())
-//                .outputFolder(movieArgsDto.getVideoFolderPath())
-//                .executionScriptFilePath(ScriptsRender.RENDER_SCRIPT_FILE_PATH)
-//                .build();
-//
-//        String[] command = script.buildScriptCommand(movieArgs);
-//
-//        CompletableFuture<Process> currentProcess = script.executeMovieRender(command);
-//
-//        cachedPreview = buildMovieRender(movieArgsDto, currentProcess);
+    @Async
+    public void renderMovie(MovieArgsDto movieArgsDto) throws Exception {
         RenderMovie renderMovie = buildMovieRender();
 
-        cachedPreview = renderMovie.executeRenderMovieScript(movieArgsDto);
+        cachedMovie = renderMovie.executeRenderMovieScript(movieArgsDto);
     }
 
     private RenderPreview buildPreviewRender(VideoRenderDto videoRenderDto) throws Exception {
@@ -102,6 +93,10 @@ public class VideoService {
 
     public byte[] getCachedPreview() {
         return cachedPreview;
+    }
+
+    public byte[] getCachedMovie() {
+        return cachedMovie;
     }
 
 }

@@ -36,13 +36,19 @@ public class VideoController {
     }
 
     @PostMapping("/movie-upload")
-    public void requestMovieRender(@RequestBody MovieArgsDto movieArgsDto) {
+    public void requestMovieRender(@RequestBody MovieArgsDto movieArgsDto) throws Exception {
         service.renderMovie(movieArgsDto);
     }
 
     @GetMapping(path = "/preview-download")
     public byte[] renderPreview() {
         return Optional.of(service.getCachedPreview())
+                .orElse(new byte[0]);
+    }
+
+    @GetMapping(path = "/movie-download")
+    public byte[] renderMovie() {
+        return Optional.of(service.getCachedMovie())
                 .orElse(new byte[0]);
     }
 
@@ -55,4 +61,5 @@ public class VideoController {
     public ResponseEntity<String> startProgressEvent(@RequestParam("guid") String guid) {
         return renderProgressService.initEvent(guid);
     }
+
 }

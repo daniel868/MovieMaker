@@ -15,30 +15,17 @@ public class RenderMovie extends RenderBase {
         this.scriptsRender = scriptsRender;
     }
 
-    public byte[] executeRenderMovieScript(MovieArgsDto movieArgsDto) {
+    public byte[] executeRenderMovieScript(MovieArgsDto movieArgsDto) throws Exception {
+
         VideoScriptArgs args = buildScriptsArgs(movieArgsDto);
 
         String[] command = scriptsRender.buildScriptCommand(args);
 
-        CompletableFuture<Process> currentProcess = scriptsRender.executeMovieRender(command);
-
-        Semaphore syncSemaphore = new Semaphore(0);
-
         String movieFilePath = String.format("%s%s", movieArgsDto.getVideoFolderPath(),
                 movieArgsDto.getVideoFileName());
 
-        try {
-            emitProgressStatus(100);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            syncSemaphore.acquire();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
-        return scriptsRender.provideCreatedMovie(currentProcess, movieFilePath, syncSemaphore);
+        return new byte[0];
     }
 
     private VideoScriptArgs buildScriptsArgs(MovieArgsDto movieArgsDto) {

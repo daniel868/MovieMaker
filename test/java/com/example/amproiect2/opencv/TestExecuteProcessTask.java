@@ -49,8 +49,8 @@ public class TestExecuteProcessTask implements BiConsumer<Process, Throwable> {
 
         String[] command = underTest.buildScriptCommand(args);
 
-        CompletableFuture<Process> processCompletableFuture = underTest.executeMovieRender(command);
-        processCompletableFuture.whenComplete(this);
+//        underTest.executeMovieRender(command);
+//        processCompletableFuture.whenComplete(this);
 
         try {
             mySemaphore.acquire();
