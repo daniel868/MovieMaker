@@ -60,6 +60,11 @@ public class MediaController {
         return mediaService.getAudioFileByIndex(audioIndex);
     }
 
+    @DeleteMapping("/images/delete/{id}")
+    public void deleteImageById(@PathVariable Long id) {
+        System.out.println("Delete for id: " + id);
+        mediaService.deleteFileById(id);
+    }
 
 
 }

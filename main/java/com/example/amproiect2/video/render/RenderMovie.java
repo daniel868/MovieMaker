@@ -5,9 +5,6 @@ import com.example.amproiect2.video.scripts.ScriptsRender;
 import com.example.amproiect2.video.scripts.VideoScriptArgs;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Semaphore;
-
 public class RenderMovie extends RenderBase {
     private final ScriptsRender scriptsRender;
 
@@ -15,17 +12,13 @@ public class RenderMovie extends RenderBase {
         this.scriptsRender = scriptsRender;
     }
 
-    public byte[] executeRenderMovieScript(MovieArgsDto movieArgsDto) throws Exception {
+    public byte[] executeRenderMovieScript(MovieArgsDto movieArgsDto) {
 
         VideoScriptArgs args = buildScriptsArgs(movieArgsDto);
 
         String[] command = scriptsRender.buildScriptCommand(args);
 
-        String movieFilePath = String.format("%s%s", movieArgsDto.getVideoFolderPath(),
-                movieArgsDto.getVideoFileName());
-
-
-        return new byte[0];
+        return scriptsRender.executeMovieRender(command, args);
     }
 
     private VideoScriptArgs buildScriptsArgs(MovieArgsDto movieArgsDto) {

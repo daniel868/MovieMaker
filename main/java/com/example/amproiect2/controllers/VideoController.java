@@ -46,12 +46,6 @@ public class VideoController {
                 .orElse(new byte[0]);
     }
 
-    @GetMapping(path = "/movie-download")
-    public byte[] renderMovie() {
-        return Optional.of(service.getCachedMovie())
-                .orElse(new byte[0]);
-    }
-
     @GetMapping("/current-progress")
     public SseEmitter provideProgressEvent() throws IOException {
         return renderProgressService.provideEvent();

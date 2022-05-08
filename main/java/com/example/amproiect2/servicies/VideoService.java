@@ -28,7 +28,6 @@ public class VideoService {
     private final MediaDatasource mediaDatasource;
     private byte[] cachedPreview;
 
-    private byte[] cachedMovie;
     private final ScriptsRender script;
 
     @Autowired
@@ -36,7 +35,6 @@ public class VideoService {
         this.mediaDatasource = mediaDatasource;
         this.script = script;
         cachedPreview = new byte[0];
-        cachedMovie = new byte[0];
     }
 
     @Async
@@ -52,11 +50,10 @@ public class VideoService {
                 .get();
     }
 
-    @Async
     public void renderMovie(MovieArgsDto movieArgsDto) throws Exception {
         RenderMovie renderMovie = buildMovieRender();
 
-        cachedMovie = renderMovie.executeRenderMovieScript(movieArgsDto);
+        renderMovie.executeRenderMovieScript(movieArgsDto);
     }
 
     private RenderPreview buildPreviewRender(VideoRenderDto videoRenderDto) throws Exception {
@@ -95,8 +92,5 @@ public class VideoService {
         return cachedPreview;
     }
 
-    public byte[] getCachedMovie() {
-        return cachedMovie;
-    }
 
 }

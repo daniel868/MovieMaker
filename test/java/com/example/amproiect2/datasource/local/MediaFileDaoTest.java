@@ -32,4 +32,5 @@ class MediaFileDaoTest {
         //then
         assertThat(underTest.size()).isEqualTo(1);
     }
+
 }

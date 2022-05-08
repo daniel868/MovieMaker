@@ -70,5 +70,9 @@ public class MediaService {
                 .orElseThrow(() -> new RuntimeException("Could not get audio at index " + index));
     }
 
+    public void deleteFileById(Long id) {
+        mediaDatasource.deleteFile(id);
+    }
+
 }
 

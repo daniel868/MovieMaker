@@ -57,7 +57,8 @@ public class MediaDatasource {
         for (int i = 0; i < cachedImages.size(); i++) {
             String path = String.format("%s%d", MediaService.URL_IMAGE, i);
             String fileName = imagesKeys.get(i).getObjectFileName();
-            localImageFiles.add(new LocalFileDto(path, fileName));
+            String id = String.valueOf(imagesKeys.get(i).getId());
+            localImageFiles.add(new LocalFileDto(id, path, fileName));
         }
         return localImageFiles;
     }
@@ -69,7 +70,8 @@ public class MediaDatasource {
         for (int i = 0; i < cachedAudio.size(); i++) {
             String path = String.format("%s%d", MediaService.URL_AUDIO, i);
             String fileName = audioKeys.get(i).getObjectFileName();
-            localAudioFiles.add(new LocalFileDto(path, fileName));
+            String id = String.valueOf(imagesKeys.get(i).getId());
+            localAudioFiles.add(new LocalFileDto(id, path, fileName));
         }
         return localAudioFiles;
     }
@@ -89,6 +91,13 @@ public class MediaDatasource {
         } catch (Exception e) {
             throw new RuntimeException("Could not save file: " + e.getMessage());
         }
+    }
+
+    public void deleteFile(Long id) {
+        MediaFile toDeleteFile = mediaFileDao.getFileById(id);
+        amazonFileStore.deleteFile(BucketName.PROFILE_IMAGE.getBucketName(),
+                toDeleteFile.getAwsObjectKey());
+        mediaFileDao.deleteById(id);
     }
 
     public List<byte[]> getCachedImages() {

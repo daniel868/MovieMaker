@@ -62,4 +62,12 @@ public class AmazonFileStore {
         }
     }
 
+    public void deleteFile(String bucketName, String objectKey) {
+        try {
+            s3.deleteObject(bucketName, objectKey);
+        } catch (AmazonServiceException e) {
+            throw new IllegalStateException("Could not delete file from AWS: " + objectKey);
+        }
+    }
+
 }

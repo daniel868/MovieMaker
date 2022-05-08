@@ -40,6 +40,13 @@ public class MediaFileDao {
                 }).collect(Collectors.toList());
     }
 
+    public MediaFile getFileById(Long id) {
+        return mediaFileRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not found file with id: " + id));
+    }
 
+    public void deleteById(Long id) {
+        mediaFileRepository.deleteById(id);
+    }
 
 }

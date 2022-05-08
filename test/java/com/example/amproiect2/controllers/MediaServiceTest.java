@@ -26,18 +26,4 @@ class MediaServiceTest {
         assertThat(underTest.size()).isEqualTo(3);
     }
 
-    @Test
-    void couldFetchAudioEndpoint() {
-        //given
-        List<LocalFileDto> underTest = mediaService.fetchAudioEndpoint().stream()
-                .map(audioEndpoint -> new LocalFileDto(
-                        audioEndpoint.getFileUrl(),
-                        "fileName"))
-                .collect(Collectors.toList());
-
-
-        //then
-        assertThat(underTest.size()).isEqualTo(1);
-    }
-
 }
