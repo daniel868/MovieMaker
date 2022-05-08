@@ -9,7 +9,6 @@ import java.util.concurrent.Semaphore;
 
 public abstract class ProvideBaseAnimation extends Thread implements IAnimation {
     private final List<BufferedImage> animatedList;
-
     private final Semaphore releaseBuild;
 
     protected ProvideBaseAnimation(Semaphore releaseBuild) {

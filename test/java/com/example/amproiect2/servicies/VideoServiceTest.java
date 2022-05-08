@@ -1,19 +1,20 @@
 package com.example.amproiect2.servicies;
 
+import com.defano.jsegue.AnimatedSegue;
 import com.example.amproiect2.datasource.MediaDatasource;
 import com.example.amproiect2.entities.VideoRenderDto;
-import com.example.amproiect2.video.effects.EffectFactory;
+import com.example.amproiect2.utils.JsonParser;
+import com.example.amproiect2.video.render.RenderPreview;
+import com.example.amproiect2.video.render.RenderFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.concurrent.CompletableFuture;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class VideoServiceTest {
@@ -28,16 +29,18 @@ class VideoServiceTest {
 
     @BeforeEach
     void setUp() {
-        videoRenderDto = new VideoRenderDto(EffectFactory.ScrollRightEffect, 3, 4);
-        underTest = new VideoService(mediaDatasource);
+
     }
 
     @Test
     void couldRenderEffect() throws Exception {
-//        CompletableFuture<byte[]> completableFuture = underTest.renderPreview(videoRenderDto);
+        List<AnimatedSegue> tasks = new ArrayList<>();
+        JsonParser.readFromJsonFile("render.json", tasks);
+
+//        RenderPreview render = RenderFactory.provideRender(RenderFactory.RENDER_MOVIE, tasks)
+//                .setOutputFileName("MediaRender.mp4");
 //
-//        FileInputStream expectedFile = new FileInputStream(EffectFactory.ScrollRightEffect + ".mp4");
-//
-//        assertThat(expectedFile.readAllBytes().length).isEqualTo(completableFuture.get().length);
+//        render.renderMediaContent();
+
     }
 }

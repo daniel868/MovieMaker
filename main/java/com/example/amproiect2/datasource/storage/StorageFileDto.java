@@ -9,14 +9,12 @@ public class StorageFileDto {
     private final HashMap<String, String> metaData;
     private final InputStream fileInputStream;
 
-
     public StorageFileDto(String filePath, String fileName, HashMap<String, String> metaData, InputStream fileInputStream) {
         this.filePath = filePath;
         this.fileName = fileName;
         this.metaData = metaData;
         this.fileInputStream = fileInputStream;
     }
-
 
     public String getFilePath() {
         return filePath;

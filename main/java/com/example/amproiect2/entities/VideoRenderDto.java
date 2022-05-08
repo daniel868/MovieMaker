@@ -1,9 +1,9 @@
 package com.example.amproiect2.entities;
 
 public class VideoRenderDto {
-    private String effectType;
-    private int sourceIndex;
-    private int destinationIndex;
+    private final String effectType;
+    private final int sourceIndex;
+    private final int destinationIndex;
 
     public VideoRenderDto(String effectType, int sourceIndex, int destinationIndex) {
         this.effectType = effectType;
@@ -23,17 +23,6 @@ public class VideoRenderDto {
         return destinationIndex;
     }
 
-    public void setEffectType(String effectType) {
-        this.effectType = effectType;
-    }
-
-    public void setSourceIndex(int sourceIndex) {
-        this.sourceIndex = sourceIndex;
-    }
-
-    public void setDestinationIndex(int destinationIndex) {
-        this.destinationIndex = destinationIndex;
-    }
 
     @Override
     public String toString() {

@@ -12,16 +12,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class VideoLoadServiceTest {
 
     @Autowired
-    private VideoLoadService underTest;
+    private ManageVideoFiles underTest;
 
     @Test
     void couldReadFileFromThread() throws Exception {
         //given
-        CompletableFuture<byte[]> completableFuture = underTest.loadVideoFile();
-        //when
-
-        //then
-        assertThat(completableFuture.get()).isNotNull();
+        underTest.deleteFilesExtension();
     }
 
 }

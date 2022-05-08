@@ -60,10 +60,6 @@ public class MediaController {
         return mediaService.getAudioFileByIndex(audioIndex);
     }
 
-    @GetMapping("/video/download")
-    public byte[] getVideoPlayer() throws Exception {
-        return mediaService.provideTestVideo();
-    }
 
 
 }

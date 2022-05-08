@@ -2,22 +2,19 @@ package com.example.amproiect2.video.render;
 
 import com.defano.jsegue.AnimatedSegue;
 import com.example.amproiect2.video.FakeVideoRenderProvider;
-import com.example.amproiect2.video.effects.EffectFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RenderFactoryTest {
 
-    private Render underTest;
+    private RenderPreview underTest;
 
     private List<AnimatedSegue> effects;
 
@@ -31,10 +28,10 @@ class RenderFactoryTest {
 
     @Test
     void couldRenderAnimation() {
-        underTest = RenderFactory
-                .provideRender(RenderFactory.RENDER_PREVIEW, effect);
-
-        underTest.setOutputFileName("test.mp4");
+//        underTest = RenderFactory
+//                .provideRender(RenderFactory.RENDER_PREVIEW, effect);
+//
+//        underTest.setOutputFileName("test.mp4");
 
         try {
             underTest.renderMediaContent();
@@ -55,8 +52,8 @@ class RenderFactoryTest {
 
     @Test
     void couldRenderMovie() {
-        underTest = RenderFactory
-                .provideRender(RenderFactory.RENDER_MOVIE, effects);
+//        underTest = RenderFactory
+//                .provideRender(RenderFactory.RENDER_MOVIE, effects);
 
         underTest.setOutputFileName("test_movie.mp4");
 

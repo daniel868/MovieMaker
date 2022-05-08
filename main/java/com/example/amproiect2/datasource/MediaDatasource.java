@@ -17,10 +17,8 @@ import java.util.Optional;
 public class MediaDatasource {
     private final MediaFileDao mediaFileDao;
     private final AmazonFileStore amazonFileStore;
-
     private List<byte[]> cachedImages;
     private List<byte[]> cachedAudio;
-
     private List<MediaFile> imagesKeys;
     private List<MediaFile> audioKeys;
 
