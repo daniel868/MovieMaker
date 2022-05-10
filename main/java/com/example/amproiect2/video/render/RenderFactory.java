@@ -2,11 +2,9 @@ package com.example.amproiect2.video.render;
 
 import com.defano.jsegue.AnimatedSegue;
 import com.example.amproiect2.video.animation.ProvideBaseAnimation;
-import com.example.amproiect2.video.animation.ProvideMovieAnimation;
 import com.example.amproiect2.video.animation.ProvidePreviewAnimation;
 import com.example.amproiect2.video.scripts.ScriptsRender;
 
-import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class RenderFactory {

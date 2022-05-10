@@ -21,11 +21,13 @@ public abstract class ProvideBaseAnimation extends Thread implements IAnimation 
     public void onFrameRendered(AnimatedSegue animatedSegue, BufferedImage bufferedImage) {
         BufferedImage resized = resizeImage(bufferedImage);
         animatedList.add(resized);
+       // System.out.println("Added new frame");
     }
 
     @Override
     public void onSegueAnimationCompleted(AnimatedSegue animatedSegue) {
         releaseBuild.release();
+        System.out.println("Released");
     }
 
     public List<BufferedImage> getAnimatedList() {
