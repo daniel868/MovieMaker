@@ -70,7 +70,7 @@ public class MediaDatasource {
         for (int i = 0; i < cachedAudio.size(); i++) {
             String path = String.format("%s%d", MediaService.URL_AUDIO, i);
             String fileName = audioKeys.get(i).getObjectFileName();
-            String id = String.valueOf(imagesKeys.get(i).getId());
+            String id = String.valueOf(audioKeys.get(i).getId());
             localAudioFiles.add(new LocalFileDto(id, path, fileName));
         }
         return localAudioFiles;

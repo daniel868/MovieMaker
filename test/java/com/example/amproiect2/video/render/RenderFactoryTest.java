@@ -23,15 +23,17 @@ class RenderFactoryTest {
     @BeforeEach
     void setUp() {
         effects = FakeVideoRenderProvider.getAnimations();
-        effect = FakeVideoRenderProvider.getAnimations().get(0);
+
+
+        effect = FakeVideoRenderProvider.getAnimations().get(3);
     }
 
     @Test
     void couldRenderAnimation() {
-//        underTest = RenderFactory
-//                .provideRender(RenderFactory.RENDER_PREVIEW, effect);
-//
-//        underTest.setOutputFileName("test.mp4");
+        underTest = (RenderPreview) RenderFactory
+                .provideRender(RenderFactory.RENDER_PREVIEW, effect);
+
+        underTest.setOutputFileName("test.mp4");
 
         try {
             underTest.renderMediaContent();

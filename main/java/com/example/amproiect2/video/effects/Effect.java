@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 public class Effect {
     private final static int DEFAULT_EFFECT_DURATION = 2000;
-
     private BufferedImage source, destination;
     private int effectDuration = DEFAULT_EFFECT_DURATION;
     private String effectType;

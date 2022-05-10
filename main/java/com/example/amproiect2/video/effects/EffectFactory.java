@@ -17,9 +17,10 @@ public class EffectFactory {
         return SegueBuilder.of(clazz)
                 .withSource(requestedEffect.getSource())
                 .withDestination(requestedEffect.getDestination())
-                .withDuration(requestedEffect.getEffectDuration(),
+                .withDuration(15000,
                         TimeUnit.MILLISECONDS)
-                .withMaxFramesPerSecond(30);
+                .withMaxFramesPerSecond(15);
+
     }
 
     public static AnimatedSegue provideEffect(Effect requestedEffect) {
@@ -27,13 +28,13 @@ public class EffectFactory {
             case AlphaDissolveEffect:
                 return createEffect(
                         requestedEffect,
-                        AlphaDissolveEffect.class)
+                        ScrollUpEffect.class)
                         .build();
 
             case PixelDissolveEffect:
                 return createEffect(
                         requestedEffect,
-                        PixelDissolveEffect.class)
+                        ScrollDownEffect.class)
                         .build();
 
             case ScrollLeftEffect:
@@ -51,7 +52,7 @@ public class EffectFactory {
                 return SegueBuilder.of(PlainEffect.class)
                         .withSource(requestedEffect.getSource())
                         .withDestination(requestedEffect.getDestination())
-                        .withDuration(requestedEffect.getEffectDuration(),
+                        .withDuration(10000,
                                 TimeUnit.MILLISECONDS)
                         .withMaxFramesPerSecond(30)
                         .build();
